@@ -20,12 +20,20 @@ let config = {
       },
       {
         test: /\.scss$/, // files ending with .scss
-        use: ['css-hot-loader'].concat(ExtractTextWebpackPlugin.extract({
-        
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader', 'postcss-loader'],   
-        })),
+        use: ExtractTextWebpackPlugin.extract({ // call our plugin with extract method
+          use: ['css-loader', 'sass-loader'], // use these loaders
+          fallback: 'style-loader' // fallback for any CSS not extracted
+        }) // end extract
       },
+      // CSS HOT LOADER
+      // {
+      //   test: /\.scss$/, // files ending with .scss
+      //   use: ['css-hot-loader'].concat(ExtractTextWebpackPlugin.extract({
+        
+      //     fallback: 'style-loader',
+      //     use: ['css-loader', 'sass-loader', 'postcss-loader'],   
+      //   })),
+      // },
       {
         test: /\.jsx$/, // all files ending with .jsx
         loader: 'babel-loader', // use the babel-loader for all .jsx files
